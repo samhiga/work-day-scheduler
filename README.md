@@ -1,99 +1,111 @@
-# 05 Third-Party APIs: Work Day Scheduler
+# password-generator
 
-## Your Task
+## Technology Used 
 
-Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
+| Technology Used         | Resource URL           | 
+| ------------- |:-------------:| 
+| HTML    | [https://developer.mozilla.org/en-US/docs/Web/HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) | 
+| CSS     | [https://developer.mozilla.org/en-US/docs/Web/CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)      |   
+| Git | [https://git-scm.com/](https://git-scm.com/)     | 
+| Javascript | [https://developer.mozilla.org/en-US/docs/Web/JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)   |
+| jQuery | [https://jquery.com/](https://jquery.com/)   |
+| Bootstrap | [https://getbootstrap.com/](https://getbootstrap.com/)   |
+| Day.js | [https://day.js.org/](https://day.js.org/)   |
 
-You'll need to use the [Day.js](https://day.js.org/en/) library to work with date and time. Be sure to read the documentation carefully and concentrate on using Day.js in the browser.
 
-## User Story
+## Description 
 
-```md
-AS AN employee with a busy schedule
-I WANT to add important events to a daily planner
-SO THAT I can manage my time effectively
+[Visit the Deployed Site](https://samhiga.github.io/work-day-scheduler/)
+
+This site has the ability to tell the users the current time and date as well as write down their notes or tasks for each hour of their workday (9am - 5pm). They can then save anything written down for later time using the save button for each row.
+
+
+
+
+## Table of Contents 
+
+If your README is very long, add a table of contents to make it easy for users to find what they need.
+
+* [Javascript Example](#javascript-example)
+* [Usage](#usage)
+* [Learning Points](#learning-points)
+* [Author Info](#author-info)
+* [Credits](#credits)
+
+
+
+## Javascript Example
+
+To get a hold of this project, simply navigate to my Github profile and select the repo "work-day-schedule". From there copy the SSH link into your terminal, Gitbash, or whatever application you prefer and use git copy and then paste link. You can then open it using VS Code.
+
+
+```javascript
+  $(document).ready(function (){
+setInterval(function(){
+$("#currentDay").text(dayjs().format("dddd, MMMM D YYYY, h:mm:ss a"));
+}, )
+  })
 ```
 
-## Acceptance Criteria
+In the above code, I used a function that utilized jQuery and Day.js to be able to display the current date and time.
 
-```md
-GIVEN I am using a daily planner to create a schedule
-WHEN I open the planner
-THEN the current day is displayed at the top of the calendar
-WHEN I scroll down
-THEN I am presented with timeblocks for standard business hours
-WHEN I view the timeblocks for that day
-THEN each timeblock is color coded to indicate whether it is in the past, present, or future
-WHEN I click into a timeblock
-THEN I can enter an event
-WHEN I click the save button for that timeblock
-THEN the text for that event is saved in local storage
-WHEN I refresh the page
-THEN the saved events persist
+```javascript
+function currentColor(){
+  var currentHour = dayjs().hour()
+  $('.time-block').each(function() {
+    var currentId = $(this).attr('id')
+    var numberHour = currentId.slice(-2)
+    if (numberHour < currentHour) {
+      $(this).removeClass('present')
+      $(this).removeClass('future')
+      $(this).addClass('past')
+    } else if(currentHour == numberHour){
+      $(this).removeClass('past')
+      $(this).removeClass('future')
+      $(this).addClass('present')
+    }else if (numberHour > currentHour){
+      $(this).removeClass('past')
+      $(this).removeClass('present')
+      $(this).addClass('future')
+    }
+  })
+}
+
 ```
+
+In order to get the rows for each hour to change color, I again utilized jQeury and Day.js by creating a function that contained an if else statement. The past hours would show up as grey, while the current hour would be red, and future hour be displayed as green.
+
+
+## Usage 
+
+In order to use the work day scheduler write down any tasks or notes in the rows for each hour. After that you may click the save button on the right of each row. You could then return at a later time and you notes will still be there 
+
 
 The following animation demonstrates the application functionality:
 
 <!-- @TODO: create ticket to review/update image) -->
 ![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
 
-## Grading Requirements
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
 
-This Challenge is graded based on the following criteria:
+## Learning Points 
 
-### Technical Acceptance Criteria: 40%
 
-* Satisfies all of the above acceptance criteria plus the following:
+Through this project, I got a better understanding of jQuery, Bootstrap, and Day.js. There is still a lot to learn from these tools, but I have better baseline understanding while also continuing to get better at creating functions and if else statements.
 
-  * Uses a date utility library to work with date and time
 
-### Deployment: 32%
+## Author Info
 
-* Application deployed at live URL
 
-* Application loads with no errors
+### Sam Higa 
 
-* Application GitHub URL submitted
 
-* GitHub repo contains application code
+* [Portfolio](https://samhiga.github.io/my-portfolio/)
+* [LinkedIn](https://www.linkedin.com/in/sam-higa-b887b9209/)
+* [Github](https://github.com/samhiga)
 
-### Application Quality: 15%
 
-* Application user experience is intuitive and easy to navigate
 
-* Application user interface style is clean and polished
+## Credits
 
-* Application resembles the mock-up functionality provided in the Challenge instructions
-
-### Repository Quality: 13%
-
-* Repository has a unique name
-
-* Repository follows best practices for file structure and naming conventions
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages
-
-* Repository contains quality README file with description, screenshot, and link to deployed application
-
-## Review
-
-You are required to submit the following for review:
-
-* The URL of the deployed application
-
-* The URL of the GitHub repository, with a unique name and a README describing the project
-
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+Tutor: Brandon Rose
